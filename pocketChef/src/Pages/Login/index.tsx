@@ -27,6 +27,10 @@ const Login = () => {
     navigator.navigate("StackHome", { name: "Home" });
   };
 
+  const handleCadastro = () => {
+    navigator.navigate("StackCadastro", { name: "Cadastro" });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -49,6 +53,7 @@ const Login = () => {
         </View>
 
         <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
+        <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
       </View>
     </TouchableWithoutFeedback>
   );
