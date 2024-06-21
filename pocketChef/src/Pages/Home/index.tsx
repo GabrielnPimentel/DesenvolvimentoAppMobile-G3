@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Text, View } from "react-native";
+import { styles } from "./style";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Home</Text>
+    </View>
+  );
+};
 
-export default Home
+export default Home;

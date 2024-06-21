@@ -1,9 +1,6 @@
-import React from 'react'
+import React from "react";
+import { StackRoutes } from "./StackRoutes";
 
-const index = () => {
-  return (
-    <div>index</div>
-  )
+export function Routes() {
+  return <StackRoutes />;
 }
-
-export default index
