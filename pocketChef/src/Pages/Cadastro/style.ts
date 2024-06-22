@@ -10,31 +10,14 @@ export const styles = StyleSheet.create({
     },
     titulo:{
         textAlign:'center',
-        paddingTop:300,
-        fontSize:30,
+        paddingTop:250,
+        fontSize:31,
         fontWeight:'bold',
         color:'#fff'
     },
-    email:{
-        alignContent:'center',
-        textAlign:'center',
-        backgroundColor: '#042628',
-        width:370,
-        height:55,
-        marginTop:30,
-        fontSize:14,
-        fontWeight:'bold',
-        borderRadius:20
-    },
-    senha:{
-        alignContent:'center',
-        textAlign:'center',
-        backgroundColor: '#042628',
-        width:370,
-        height:55,
-        marginTop:30,
-        fontSize:14,
-        fontWeight:'bold',
-        borderRadius:20
-    }
+     voltarIcon:{
+        color:'#ffffff',
+        marginTop:55,
+        marginRight:330
+     }
 })
