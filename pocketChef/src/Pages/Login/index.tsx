@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   View,
   Text,
-} from "react-native"; // Importe o componente Text de react-native
+} from "react-native";
 import { styles } from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { ButtonComponent } from "../../Components/ButtonComponent";

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { ImageBackground, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import {styles} from '../Cadastro/style'
 import { TextInputComponent } from '../../Components/TextInput';
-import Icon from '@expo/vector-icons/Ionicons';
 import IconDesign from '@expo/vector-icons/AntDesign'
-import fundoCadastro from "../../Assets/fundoCadastro.jpeg"
+import { ButtonComponent } from '../../Components/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -12,14 +12,19 @@ function Cadastro() {
    
     const [email,setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
+    const navigator = useNavigation();
     
     const handleEmail = (value:string) => {
         setEmail(value)
     }
 
     const handlePassword = (value:string) => {
-        setEmail(value)
+        setPassword(value)
     }
+
+    const handleLogin = () => {
+        navigator.navigate("StackLogin", { name: "Login" });
+      };
 
     return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -43,6 +48,11 @@ function Cadastro() {
                         placeholder='Senha'
                         onChangeValue={handlePassword}
                         type={true}
+                    />
+
+                    <ButtonComponent
+                    title='Cadastrar'
+                    handleOnChange={handleLogin}
                     />
 
             </View>
