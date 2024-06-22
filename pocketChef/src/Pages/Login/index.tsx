@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Keyboard,
   TextInput,
   TouchableWithoutFeedback,
   View,
   Text,
-} from "react-native"; // Importe o componente Text de react-native
-import { styles } from "./style";
-import { useNavigation } from "@react-navigation/native";
-import { ButtonComponent } from "../../Components/ButtonComponent";
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ButtonComponent } from '../../Components/ButtonComponent';
 
 const Login = () => {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigator = useNavigation();
 
   const handleEmail = (value: string) => {
@@ -24,33 +23,35 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    navigator.navigate("StackHome", { name: "Home" });
+    // Simulação de autenticação (verifique se email/senha são válidos)
+    if (email && password) {
+      navigator.navigate('StackHome', { name: 'Home' });
+    } else {
+      alert('Preencha todos os campos!');
+    }
   };
 
   const handleCadastro = () => {
-    navigator.navigate("StackCadastro", { name: "Cadastro" });
+    navigator.navigate('StackCadastro', { name: 'Cadastro' });
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <Text style={styles.titulo}>Login</Text>
+      <View>
+        <Text>Login</Text>
 
-        <View>
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor={"#ffffff"}
-            style={styles.email}
-            onChangeText={handleEmail}
-          />
+        <TextInput
+          placeholder="Email"
+          onChangeText={handleEmail}
+          value={email}
+        />
 
-          <TextInput
-            placeholder="Senha"
-            placeholderTextColor={"#ffffff"}
-            style={styles.senha}
-            onChangeText={handleEmail}
-          />
-        </View>
+        <TextInput
+          placeholder="Senha"
+          onChangeText={handlePassword}
+          value={password}
+          secureTextEntry
+        />
 
         <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
         <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
