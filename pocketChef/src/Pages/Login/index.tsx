@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import {
   Keyboard,
-  TextInput,
   TouchableWithoutFeedback,
   View,
   Text,
+  Alert,
+  TextInput,
+  Image
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonComponent } from '../../Components/ButtonComponent';
+import IconDesign from '@expo/vector-icons/AntDesign';
+import { styles } from './style';  // Certifique-se de que o caminho para o arquivo de estilos esteja correto
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const navigator = useNavigation();
 
   const handleEmail = (value: string) => {
@@ -27,7 +31,7 @@ const Login = () => {
     if (email && password) {
       navigator.navigate('StackHome', { name: 'Home' });
     } else {
-      alert('Preencha todos os campos!');
+      Alert.alert('Erro', 'Preencha todos os campos!');
     }
   };
 
@@ -37,24 +41,43 @@ const Login = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View>
-        <Text>Login</Text>
+      <View style={styles.container}>
 
-        <TextInput
-          placeholder="Email"
-          onChangeText={handleEmail}
-          value={email}
+        <View style={styles.containerLogo}>
+        <Image
+        source={require('./logo1.png')}
         />
+        </View>
 
-        <TextInput
-          placeholder="Senha"
-          onChangeText={handlePassword}
-          value={password}
-          secureTextEntry
-        />
+        <Text style={styles.titulo}>Login</Text>
 
-        <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
-        <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
+        <View>
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="#000000"
+            style={styles.email}
+            onChangeText={handleEmail}
+            value={email}
+          />
+
+          <TextInput
+            placeholder="Senha"
+            placeholderTextColor="#070707"
+            style={styles.senha}
+            onChangeText={handlePassword}
+            value={password}
+            secureTextEntry
+          />
+
+          <ButtonComponent
+            title="Entrar"
+            handleOnChange={handleLogin}
+          />
+          <ButtonComponent
+            title="Cadastro"
+            handleOnChange={handleCadastro}
+          />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
