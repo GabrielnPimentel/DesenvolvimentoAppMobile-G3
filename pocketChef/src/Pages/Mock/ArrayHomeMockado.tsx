@@ -1,7 +1,5 @@
-import bolo from "../../Assets/boloChocolate.jpg";
-import prato from "../../Assets/prato.jpg"
-
-
+import bolo from "../../assets/boloChocolate.jpg"
+import prato from "../../assets/prato.jpg"
 
 export const categorias = [
     { id: 1, title: "Café da manhã" },

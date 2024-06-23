@@ -1,45 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FlatList, Image, Text, View } from "react-native";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
 import { categorias, pratos, pratosPop } from "../Mock/ArrayHomeMockado";
-import axios from "axios";
-
-interface PropsApi {
-  id: number;
-  title: string;
-  image?: string;
-  imageType?: string;
-}
+import prato from "../../Assets/prato.jpg";
 
 export function Home() {
-
-  const [apiSpoon, setApiSpoon] = useState<PropsApi[]>([]);
-  const categoria = "breakfast";
-  const resultados = 4;
-
-  const loadApi = async () => {
-
-    const baseUrl = "https://api.spoonacular.com"
-    const apiKey = "e172f1db403d4a06bb436f5c273a5159"
-
-    //Url funcionando com chave
-    //https://api.spoonacular.com/recipes/complexSearch?apiKey=e172f1db403d4a06bb436f5c273a5159&type=breakfast&minServings=2&number=4
-    //${baseUrl}/recipes/complexSearch?apiKey=${apiKey}&type=${categoria}&minServings=2&number=${resultados}
-
-    try {
-      const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e172f1db403d4a06bb436f5c273a5159&type=breakfast&minServings=2&number=4`)
-      setApiSpoon([...apiSpoon, ...response.data.results])
-      console.log('Requisição bem sucedida!');
-    } catch (error) {
-      console.log('Erro na requisição');
-    }
-  }
-
-  useEffect(() => {
-    loadApi();
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -80,25 +46,6 @@ export function Home() {
           </View>
         )}
       />
-
-      {/* <FlatList
-        horizontal={true}
-        data={apiSpoon}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.pratosCards}>
-            <Image style={styles.imgPrato} source={{uri: item.image}} />
-            <View style={styles.pratoInfo}>
-              <Text style={styles.nomePrato}>{item.title}</Text>
-              <View style={styles.pratoDatas}>
-                <Text style={{ fontSize: 14, color: "#fff" }}>10 min</Text>
-                <Text style={{ fontSize: 14, color: "#fff" }}>2</Text>
-              </View>
-            </View>
-          </View>
-        )}
-      /> */}
-
       </View>
 
       <View style={styles.receitasContainer}>
