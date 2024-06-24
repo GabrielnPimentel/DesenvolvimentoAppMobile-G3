@@ -29,11 +29,11 @@ export const AuthProvider = ({filho}:any) => {
   const [password, setPassword] = useState<string>('');
 
   const loginAuthentication = (email: string, password: string) => {
-    if (email != "felipe" || password != "123"){
-        Alert.alert("insira credenciais validas!")
-    } else{
-        navigator.navigate('StackHome', { name: 'Home' })
-    }
+    // if (email != "felipe" || password != "123"){
+    //     Alert.alert("insira credenciais validas!")
+    // } else{
+    //     navigator.navigate('StackHome', { name: 'Home' })
+    // }
     };
 
     return (
