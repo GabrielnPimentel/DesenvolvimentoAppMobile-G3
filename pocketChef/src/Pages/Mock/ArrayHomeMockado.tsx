@@ -1,5 +1,9 @@
-import bolo from "../../assets/boloChocolate.jpg"
-import prato from "../../assets/prato.jpg"
+import bolo from "../../Assets/boloChocolate.jpg";
+import prato from "../../Assets/prato.jpg"
+
+const endereco = 'https://voalzira.com/wp-content/uploads/2020/12/Bolo-de-Festa-de-Chocolate-com-Confete-e-Bis-scaled.jpg'
+
+
 
 export const categorias = [
     { id: 1, title: "Café da manhã" },
@@ -10,10 +14,10 @@ export const categorias = [
   ];
 
   export const pratos = [
-    {id: 1, title: "Pure de batata com fritas", image: prato, time: "40min", n: "2"},
-    {id: 2, title: "Pure de batata com fritas", image: prato, time: "40min", n: "2"},
-    {id: 3, title: "Pure de batata com fritas", image: prato, time: "40min", n: "2"},
-    {id: 4, title: "Pure de batata com fritas", image: prato, time: "40min", n: "2"},
+    {id: 1, title: "Pure de batata com fritas", image: {uri: endereco}, time: "40min", n: "2"},
+    {id: 2, title: "Pure de batata com fritas", image: {uri: endereco}, time: "40min", n: "2"},
+    {id: 3, title: "Pure de batata com fritas", image: {uri: endereco}, time: "40min", n: "2"},
+    {id: 4, title: "Pure de batata com fritas", image: {uri: endereco}, time: "40min", n: "2"},
   ];
 
   export const pratosPop = [
