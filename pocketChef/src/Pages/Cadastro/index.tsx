@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ImageBackground, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Alert, Image, ImageBackground, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import {styles} from '../Cadastro/style'
 import { TextInputComponent } from '../../Components/TextInput';
 import IconDesign from '@expo/vector-icons/AntDesign'
@@ -23,16 +23,25 @@ function Cadastro() {
     }
 
     const handleLogin = () => {
-        navigator.navigate("StackLogin", { name: "Login" });
-      };
+        if (email && password) {
+            navigator.navigate("StackLogin", { name: "Login" });
+          } else {
+            Alert.alert('Erro', 'Preencha todos os campos!');
+          }
+        };
 
     return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
         <View style={styles.container}>
 
-            
-            <IconDesign name='left' size={25} style={styles.voltarIcon} />
+            <TouchableOpacity onPress={() => navigator.navigate("StackLogin", { name: "Login" })}>
+                <IconDesign name='left' size={25} style={styles.voltarIcon} />
+            </TouchableOpacity>
+
+            <View style={styles.logo}>
+                <Image source={require('./logo1.png')}/>
+            </View>
 
             <Text style={styles.titulo}>
                     Cadastro
