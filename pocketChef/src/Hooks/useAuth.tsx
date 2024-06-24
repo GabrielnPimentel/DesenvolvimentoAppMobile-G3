@@ -21,8 +21,8 @@ const AuthContext = createContext<PropsContext>({
 })
 
 //o contexto de todo a aplicação esta aqui dentro do authProvider
-export const AuthProvider = ({filho}:any) => {
-
+export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+    
     const navigator = useNavigation();
 
   const [email, setEmail] = useState<string>('');
@@ -40,7 +40,7 @@ export const AuthProvider = ({filho}:any) => {
     //manda para o app tudo o que tem no criador do contexto
     //dentro do value eu coloco todas as informações que eu quero passar ao chamar esse hook
     <AuthContext.Provider value={{email, setEmail, password, setPassword, loginAuthentication}}>
-        {filho}
+        {children}
     </AuthContext.Provider>
   )
 }
