@@ -5,13 +5,14 @@ import { TextInputComponent } from '../../Components/TextInput';
 import IconDesign from '@expo/vector-icons/AntDesign'
 import { ButtonComponent } from '../../Components/ButtonComponent';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../Hooks/useAuth';
 
 
 
 function Cadastro() {
    
-    const [email,setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
+    const {email, setEmail, password, setPassword, cadastroAuth} = useAuth();
+
     const navigator = useNavigation();
     
     const handleEmail = (value:string) => {
@@ -22,13 +23,14 @@ function Cadastro() {
         setPassword(value)
     }
 
-    const handleLogin = () => {
-        if (email && password) {
-            navigator.navigate("StackLogin", { name: "Login" });
-          } else {
-            Alert.alert('Erro', 'Preencha todos os campos!');
-          }
-        };
+    const handleCadastro = () => {
+        if (!email || !password) {
+            Alert.alert('Preencha todos os campos.');
+            return;
+        }
+
+        cadastroAuth(email, password);
+    };
 
     return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -40,7 +42,7 @@ function Cadastro() {
             </TouchableOpacity>
 
             <View style={styles.logo}>
-                <Image source={require('./logo1.png')}/>
+                <Image source={require('./logo1.png')} style={styles.logoTamanho}/>
             </View>
 
             <Text style={styles.titulo}>
@@ -51,17 +53,19 @@ function Cadastro() {
                     <TextInputComponent
                         placeholder='Email'
                         onChangeValue={handleEmail}
+                        value={email}
                     />
 
                     <TextInputComponent
                         placeholder='Senha'
                         onChangeValue={handlePassword}
                         type={true}
+                        value={password}
                     />
 
                     <ButtonComponent
                     title='Cadastrar'
-                    handleOnChange={handleLogin}
+                    handleOnChange={handleCadastro}
                     />
 
             </View>

@@ -6,9 +6,10 @@ interface PropsComponent {
     placeholder: string;
     type?: boolean;
     onChangeValue: (value: string) => void;
+    value?:string;
   }
 
-export function TextInputComponent({ placeholder, type, onChangeValue}: PropsComponent){
+export function TextInputComponent({ placeholder, type, onChangeValue, value}: PropsComponent){
     return (
       <TextInput
         placeholder={placeholder}
@@ -16,6 +17,7 @@ export function TextInputComponent({ placeholder, type, onChangeValue}: PropsCom
         style={styles.estiloTextInput}
         secureTextEntry={type}
         onChangeText={onChangeValue}
+        value={value}
       />
     )
   }

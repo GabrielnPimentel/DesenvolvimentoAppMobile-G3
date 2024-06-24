@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         backgroundColor:'#70B9BE'
     },
     logo:{
-        marginTop:64,
+        marginTop:127,
         marginBottom: 20,
     },
     titulo:{
@@ -22,5 +22,10 @@ export const styles = StyleSheet.create({
         color:'#ffffff',
         marginTop:55,
         marginRight:330
-     }
+     },
+     logoTamanho: {
+        width: 150, 
+        height: 150, 
+        resizeMode: 'contain',
+      },
 })
