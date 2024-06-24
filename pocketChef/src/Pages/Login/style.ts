@@ -9,10 +9,15 @@ export const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#70B9BE'
   },
+  animatedContainer: {
+    alignItems: 'center',
+    width: '100%',
+  },
   containerLogo: {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,  // Espaçamento abaixo da logo
+    paddingTop: 60,   // Espaçamento acima da logo
   },
   logo: {
     width: 150, // Ajuste o tamanho conforme necessário
