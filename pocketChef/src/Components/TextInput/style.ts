@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     estiloTextInput:{
         backgroundColor:'#ffffff',
-        marginTop:40,
+        marginTop:30,
         width:360,
         height:60,
         borderRadius: 15,

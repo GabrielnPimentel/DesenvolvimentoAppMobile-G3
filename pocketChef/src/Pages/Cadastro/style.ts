@@ -8,9 +8,12 @@ export const styles = StyleSheet.create({
         height:'100%',
         backgroundColor:'#70B9BE'
     },
+    logo:{
+        marginTop:64,
+        marginBottom: 20,
+    },
     titulo:{
         textAlign:'center',
-        paddingTop:250,
         fontSize:31,
         fontWeight:'bold',
         color:'#fff'
