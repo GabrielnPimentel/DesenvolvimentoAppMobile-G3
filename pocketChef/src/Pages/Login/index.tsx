@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Keyboard,
   TouchableWithoutFeedback,
   View,
   Text,
-  Alert,
   TextInput,
   Image,
-  Animated
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ButtonComponent } from '../../Components/ButtonComponent';
-import { styles } from './style';  // Certifique-se de que o caminho para o arquivo de estilos esteja correto
+  Animated,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { ButtonComponent } from "../../Components/ButtonComponent";
+import { styles } from "./style"; // Certifique-se de que o caminho para o arquivo de estilos esteja correto
+import { useAuth } from "../../Hooks/useAuth";
 
 const Login = () => {
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }));
@@ -29,12 +29,14 @@ const Login = () => {
         toValue: 1,
         duration: 200,
         useNativeDriver: true, // Adicione esta linha
-      })
+      }),
     ]).start();
   }, []);
 
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const { email, setEmail, password, setPassword, handleLoginAuth } = useAuth();
+
+  // const [email, setEmail] = useState<string>();
+  // const [password, setPassword] = useState<string>();
   const navigator = useNavigation();
 
   const handleEmail = (value: string) => {
@@ -45,17 +47,13 @@ const Login = () => {
     setPassword(value);
   };
 
-  const handleLogin = () => {
-    // Simulação de autenticação (verifique se email/senha são válidos)
-    if (email && password) {
-      navigator.navigate('StackHome', { name: 'Home' });
-    } else {
-      Alert.alert('Erro', 'Preencha todos os campos!');
-    }
+  //Async para os dados vindos da mockapi
+  const handleLogin = async () => {
+    await handleLoginAuth(email, password);
   };
 
   const handleCadastro = () => {
-    navigator.navigate('StackCadastro', { name: 'Cadastro' });
+    navigator.navigate("StackCadastro", { name: "Cadastro" });
   };
 
   return (
@@ -66,15 +64,12 @@ const Login = () => {
             styles.animatedContainer,
             {
               opacity: opacity,
-              transform: [{ translateY: offset.y }]
-            }
+              transform: [{ translateY: offset.y }],
+            },
           ]}
         >
           <View style={styles.containerLogo}>
-            <Image
-              source={require('./logo1.png')}
-              style={styles.logo}
-            />
+            <Image source={require("./logo1.png")} style={styles.logo} />
           </View>
           <Text style={styles.titulo}>Login</Text>
           <View style={styles.form}>
@@ -93,17 +88,11 @@ const Login = () => {
               value={password}
               secureTextEntry
             />
-            <ButtonComponent
-              title="Entrar"
-              handleOnChange={handleLogin}
-            />
-            <ButtonComponent
-              title="Cadastro"
-              handleOnChange={handleCadastro}
-            />
+            <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
+            <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
           </View>
         </Animated.View>
-      </View> 
+      </View>
     </TouchableWithoutFeedback>
   );
 };
