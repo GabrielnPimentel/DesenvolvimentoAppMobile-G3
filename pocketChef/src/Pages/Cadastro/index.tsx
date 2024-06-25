@@ -51,7 +51,7 @@ function Cadastro() {
 
             <View>
                     <TextInputComponent
-                        placeholder='Email'
+                        placeholder='Nome'
                         onChangeValue={handleEmail}
                         value={email}
                     />

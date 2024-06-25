@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 20,  // Espaçamento abaixo do título
   },
   form: {
     width: '100%',

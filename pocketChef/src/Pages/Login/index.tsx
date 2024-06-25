@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ButtonComponent } from "../../Components/ButtonComponent";
 import { styles } from "./style"; // Certifique-se de que o caminho para o arquivo de estilos esteja correto
 import { useAuth } from "../../Hooks/useAuth";
+import { TextInputComponent } from "../../Components/TextInput";
 
 const Login = () => {
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }));
@@ -73,20 +74,17 @@ const Login = () => {
           </View>
           <Text style={styles.titulo}>Login</Text>
           <View style={styles.form}>
-            <TextInput
-              placeholder="Email"
-              placeholderTextColor="#000000"
-              style={styles.email}
-              onChangeText={handleEmail}
+            <TextInputComponent
+              placeholder="Nome"
+              onChangeValue={handleEmail}
               value={email}
             />
-            <TextInput
+
+            <TextInputComponent
               placeholder="Senha"
-              placeholderTextColor="#070707"
-              style={styles.senha}
-              onChangeText={handlePassword}
+              onChangeValue={handlePassword}
+              type={true}
               value={password}
-              secureTextEntry
             />
             <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
             <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />

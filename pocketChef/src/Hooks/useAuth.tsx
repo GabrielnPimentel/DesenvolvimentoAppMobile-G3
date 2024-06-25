@@ -1,6 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 const apiUrl = "https://6639731c1ae792804bebc13f.mockapi.io/api/v1/emailEsenha";
@@ -34,17 +35,48 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleLoginAuth = (email: string, password: string) => {
-    if (email === "" || password === "") {
-      Alert.alert("Erro", "Preencha todos os campos!");
-    } else {
-      navigator.navigate("StackHome", { name: "Home" });
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  const checkLogin = async () => {
+    try {
+      const EmailArmazenado = await AsyncStorage.getItem("EmailUsuario");
+      if (EmailArmazenado) {
+        setEmail(EmailArmazenado);
+        navigator.navigate("StackHome", { name: "Home" });
+      }
+    } catch (error) {
+      console.error("Erro ao verificar status de login:", error);
     }
   };
 
-  const cadastroAuth = async (email: string, password: string) => {
+  const handleLoginAuth = async(nome: string, password: string) => {
+    if (nome === "" || password === "") {
+      Alert.alert("Erro", "Preencha todos os campos!");
+    } else {
+      try {
+        const response = await axios.get<any[]>(apiUrl);
+        const user = response.data.find(
+          (u) => u.nome === nome && u.password === password
+        );
+        if (user) {
+          await AsyncStorage.setItem("EmailUsuario", email);
+          setEmail(email);
+          navigator.navigate("StackHome", { name: "Home" });
+        } else {
+          Alert.alert("Erro", "Credenciais inválidas!");
+        }
+      } catch (error) {
+        console.error("Erro ao autenticar usuário:", error);
+        Alert.alert("Erro ao autenticar. Por favor, tente novamente.");
+      }
+    }
+  };
+
+  const cadastroAuth = async (nome: string, password: string) => {
     try {
-      const newUser = { email, password };
+      const newUser = { nome, password };
       const response = await axios.post(apiUrl, newUser);
       console.log("Novo usuário adicionado:", response.data);
       Alert.alert("Usuário adicionado com sucesso!");
