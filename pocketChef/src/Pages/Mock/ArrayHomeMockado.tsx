@@ -6,12 +6,19 @@ const endereco = 'https://voalzira.com/wp-content/uploads/2020/12/Bolo-de-Festa-
 
 
 export const categorias = [
-    { id: 1, title: "Café da manhã" },
-    { id: 2, title: "Lanches" },
-    { id: 3, title: "Sobremesas" },
-    { id: 4, title: "Almoço" },
-    { id: 5, title: "Janta" },
+    { id: 1, title: "breakfast" },
+    { id: 2, title: "appetizer" },
+    { id: 3, title: "dessert" },
+    { id: 4, title: "main course" },
   ];
+
+export const categoriaTraducoes = {
+  breakfast: "Café da Manhã",
+  mainCourse: "Almoço",
+  dinner: "Jantar",
+  dessert: "Sobremesa",
+  appetizer: "Lanche",
+};
 
   export const pratos = [
     {id: 1, title: "Pure de batata com fritas", image: {uri: endereco}, time: "40min", n: "2"},
