@@ -14,4 +14,9 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
   },
+  voltarIcon:{
+    color:'#ffffff',
+    marginTop:55,
+    marginRight:330
+ },
 });

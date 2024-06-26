@@ -13,7 +13,6 @@ export type RootTabParamsList = {
   TabHome: { name: string };
   TabFavoritos: { name: string };
   TabSobre: { name: string };
-  TabContas: { name: string };
 };
 
 const Tab = createBottomTabNavigator<RootTabParamsList>();
@@ -55,7 +54,7 @@ export function TabsRoutes() {
           tabBarIcon: ({ focused }) => (
             <View style={styles.boxNavigation}>
               <Icon
-                name="person"
+                name="star"
                 size={focused ? 25 : 20}
                 color={focused ? "#1c2324" : "#435d5f"}
               />
@@ -73,29 +72,11 @@ export function TabsRoutes() {
           tabBarIcon: ({ focused }) => (
             <View style={styles.boxNavigation}>
               <Icon
-                name="person"
+                name="information-circle"
                 size={focused ? 25 : 20}
                 color={focused ? "#1c2324" : "#435d5f"}
               />
               <Text style={styles.nameRoute}>Sobre</Text>
-            </View>
-          ),
-          tabBarLabel: "",
-        }}
-      />
-
-      <Tab.Screen
-        name="TabContas"
-        component={Contas}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.boxNavigation}>
-              <Icon
-                name="person"
-                size={focused ? 25 : 20}
-                color={focused ? "#1c2324" : "#435d5f"}
-              />
-              <Text style={styles.nameRoute}>Contas</Text>
             </View>
           ),
           tabBarLabel: "",

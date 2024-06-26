@@ -5,11 +5,13 @@ import { TabsRoutes } from "./TabsRoutes";
 import Login from "../Pages/Login";
 import Cadastro from "../Pages/Cadastro";
 import { AuthProvider } from "../Hooks/useAuth";
+import Contas from "../Pages/Contas";
 
 export type Pocketchef = {
   StackLogin: { name: string };
   StackCadastro: { name: string };
   StackHome: { name: string };
+  StackContas: { name: string};
 };
 
 const Stack = createNativeStackNavigator<Pocketchef>();
@@ -22,6 +24,8 @@ export function StackRoutes() {
       <Stack.Screen name="StackLogin" component={Login} />
       <Stack.Screen name="StackCadastro" component={Cadastro} />
         <Stack.Screen name="StackHome" component={TabsRoutes} />
+        <Stack.Screen name="StackContas" component={Contas}/>
+
       </Stack.Navigator>
       </AuthProvider>
     </NavigationContainer>
