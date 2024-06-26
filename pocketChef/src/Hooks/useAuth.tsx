@@ -17,6 +17,8 @@ export type PropsContext = {
   setPassword: (password: string) => void;
   cadastroAuth: (email: string, password: string) => void;
   handleLoginAuth: (email: string, password: string) => void;
+  modalAberto: boolean;
+  setModalAberto: (value: boolean) => void;
 };
 
 //criador do contexto
@@ -27,6 +29,8 @@ const AuthContext = createContext<PropsContext>({
   setPassword: () => {},
   cadastroAuth: () => {},
   handleLoginAuth: () => {},
+  modalAberto: false,
+  setModalAberto: () => {},
 });
 
 //o contexto de todo a aplicação esta aqui dentro do authProvider
@@ -34,6 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const navigator = useNavigation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [modalAberto, setModalAberto] = useState<boolean>(false);
 
   useEffect(() => {
     checkLogin();
@@ -51,9 +56,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const abrirOuFecharModal = () => {
+    setModalAberto(!modalAberto)
+  }
+
   const handleLoginAuth = async(nome: string, password: string) => {
     if (nome === "" || password === "") {
-      Alert.alert("Erro", "Preencha todos os campos!");
+      setModalAberto(!modalAberto)
     } else {
       try {
         const response = await axios.get<any[]>(apiUrl);
@@ -100,6 +109,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setPassword,
         cadastroAuth,
         handleLoginAuth,
+        modalAberto, setModalAberto
       }}
     >
       {children}

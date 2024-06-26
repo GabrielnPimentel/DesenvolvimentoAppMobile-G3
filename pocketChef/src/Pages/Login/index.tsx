@@ -4,7 +4,6 @@ import {
   TouchableWithoutFeedback,
   View,
   Text,
-  TextInput,
   Image,
   Animated,
 } from "react-native";
@@ -13,6 +12,7 @@ import { ButtonComponent } from "../../Components/ButtonComponent";
 import { styles } from "./style"; // Certifique-se de que o caminho para o arquivo de estilos esteja correto
 import { useAuth } from "../../Hooks/useAuth";
 import { TextInputComponent } from "../../Components/TextInput";
+import { ModalComponent } from "../../Components/ModalComponent";
 
 const Login = () => {
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }));
@@ -34,7 +34,7 @@ const Login = () => {
     ]).start();
   }, []);
 
-  const { email, setEmail, password, setPassword, handleLoginAuth } = useAuth();
+  const { email, setEmail, password, setPassword, handleLoginAuth, modalAberto} = useAuth();
 
   // const [email, setEmail] = useState<string>();
   // const [password, setPassword] = useState<string>();
@@ -87,6 +87,9 @@ const Login = () => {
               value={password}
             />
             <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
+            {modalAberto && (
+              <ModalComponent />
+            )}
             <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
           </View>
         </Animated.View>
