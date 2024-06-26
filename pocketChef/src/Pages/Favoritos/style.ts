@@ -3,8 +3,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    gap: 18,
+    alignContent: 'center',
   },
+
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -12,28 +14,56 @@ export const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#70B9BE",
   },
+
   usuarioNome: {
     fontSize: 20,
     color: "#fff",
   },
+
+  pratoContainer:{
+    alignItems: 'center'
+  },
+
   favoritosContainer: {
-    padding: 20,
+    position: "absolute",
+    top: 15,
+    right: 15,
+    zIndex: 2,
+    backgroundColor: '#d3d3d3',
+    borderRadius: 15,
+    padding: 5,
   },
-  favoritosCard: {
-    margin: 10,
-    backgroundColor: "#f8f8f8",
-    borderRadius: 10,
-    overflow: "hidden",
+
+  pratosCards: {
+    width: 300,
+    height: 200,
+    borderRadius: 16,
+    marginBottom: 20,
+    position: "relative",
   },
+
   imgPrato: {
     width: "100%",
-    height: 150,
-    resizeMode: "cover",
+    height: "100%",
+    borderRadius: 16,
   },
+
+  pratoInfo: {
+    position: "absolute",
+    justifyContent: "space-between",
+    padding: 10,
+    bottom: 10,
+  },
+
   nomePrato: {
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
-    margin: 10,
+    color: "#fff",
+  },
+
+  pratoDatas: {
+    flexDirection: "row",
+    gap: 12,
+    zIndex: 1,
   },
 });

@@ -12,7 +12,6 @@ import { categoriaTraducoes } from "../Mock/ArrayHomeMockado";
 import axios from "axios";
 import { CardApi } from "../../Components/CardApi";
 import { HeaderUserComponent } from "../../Components/HeaderUserComponent";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../../Hooks/useAuth";
 
 export interface PropsApi {
@@ -25,19 +24,18 @@ export interface PropsApi {
 type CategoriaKey = keyof typeof categoriaTraducoes;
 
 export function Home() {
-  const {favoritos, setFavoritos} = useAuth();
+  const { favoritos, setFavoritos, favoritar, isFavorite } = useAuth();
 
   const [apiSpoon1, setApiSpoon1] = useState<PropsApi[]>([]);
   const [apiSpoon2, setApiSpoon2] = useState<PropsApi[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectCategoria, setSelectCategoria] =
     useState<CategoriaKey>("breakfast");
-    const [modalAberto, setModalAberto] = useState<boolean>(false);
-    const resultados = 4;
+  const [modalAberto, setModalAberto] = useState<boolean>(false);
 
   const abrirOuFecharModal = () => {
-    setModalAberto(!modalAberto)
-  }
+    setModalAberto(!modalAberto);
+  };
 
   const loadApi = async (categoria: string) => {
     const baseUrl = "https://api.spoonacular.com/recipes/complexSearch";
@@ -62,39 +60,8 @@ export function Home() {
     }
   };
 
-  const loadFavoritos = async () => {
-    try {
-      const favoritosJson = await AsyncStorage.getItem("favoritos");
-      if (favoritosJson) {
-        setFavoritos(JSON.parse(favoritosJson));
-      }
-    } catch (error) {
-      console.error("Erro ao carregar favoritos:", error);
-    }
-  };
-
-  const favoritar = async (item: PropsApi) => {
-    let novosFavoritos;
-    if (favoritos.some((fav) => fav.id === item.id)) {
-      novosFavoritos = favoritos.filter((fav) => fav.id !== item.id);
-    } else {
-      novosFavoritos = [...favoritos, item];
-    }
-    setFavoritos(novosFavoritos);
-    try {
-      await AsyncStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
-    } catch (error) {
-      console.error("Erro ao salvar favorito:", error);
-    }
-  };
-
-  const isFavorite = (id: number) => {
-    return favoritos.some(fav => fav.id === id);
-  };
-
   useEffect(() => {
     loadApi(selectCategoria);
-    loadFavoritos();
   }, [selectCategoria]);
 
   if (loading) {
@@ -141,7 +108,6 @@ export function Home() {
         favoritar={favoritar}
         isFavorite={isFavorite}
       />
-
     </ScrollView>
   );
 }
