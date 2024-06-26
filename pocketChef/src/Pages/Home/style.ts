@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   },
 
   categoriaContainer: {
+    marginTop: 10,
     gap: 12,
   },
 
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
   },
 
   categoriaCardSelected: {
-    borderColor: "#000", 
+    borderColor: "#d3d3d3", 
     borderWidth: 3,
   },
 

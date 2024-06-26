@@ -1,20 +1,16 @@
 import React from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./style";
 import { PropsApi } from "../../Pages/Home";
-
-// interface PropsApi {
-//     id: number;
-//     title: string;
-//     image?: string;
-//     imageType?: string;
-//   }
+import { Ionicons } from "@expo/vector-icons";
 
 interface PropsApiComponent {
   loading?: boolean;
   handleApi?: () => void;
   spoonApi: PropsApi[];
   cardXL?: boolean;
+  favoritar: (item: PropsApi) => void;
+  isFavorite: (id: number) => boolean;
 }
 
 export function CardApi({
@@ -22,6 +18,8 @@ export function CardApi({
   spoonApi,
   handleApi,
   cardXL,
+  favoritar: toggleFavorite,
+  isFavorite
 }: PropsApiComponent) {
   return (
     <>
@@ -35,6 +33,15 @@ export function CardApi({
             renderItem={({ item }) => (
               <View style={styles.pratosCards}>
                 <Image style={styles.imgPrato} source={{ uri: item.image }} />
+                <View style={styles.favoritoContainer}>
+                  <TouchableOpacity onPress={() => toggleFavorite(item)}>
+                    <Ionicons
+                      name={isFavorite(item.id) ? "heart" : "heart-outline"}
+                      size={24}
+                      color={isFavorite(item.id) ? "red" : "gray"}
+                    />
+                  </TouchableOpacity>
+                </View>
                 <View style={styles.pratoInfo}>
                   <Text style={styles.nomePrato}>{item.title}</Text>
                   <View style={styles.pratoDatas}>
@@ -57,10 +64,17 @@ export function CardApi({
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.receitasCard}>
-                <Image
-                  style={styles.imgPratoPop}
-                  source={{ uri: item.image }}
-                />
+                <Image style={styles.imgPratoPop} source={{ uri: item.image }} />
+                <View style={styles.favoritoContainer}>
+                  <TouchableOpacity onPress={() => toggleFavorite(item)}>
+                    <Ionicons
+                      name={isFavorite(item.id) ? "heart" : "heart-outline"}
+                      size={24}
+                      color={isFavorite(item.id) ? "red" : "gray"}
+                      
+                    />
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.receitaNome}>{item.title}</Text>
               </View>
             )}

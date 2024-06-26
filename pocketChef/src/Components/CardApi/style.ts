@@ -4,11 +4,13 @@ export const styles = StyleSheet.create({
   pratoContainer: {
     marginVertical: 10,
   },
+
   pratosCards: {
     width: 260,
     height: 190,
     borderRadius: 16,
     marginRight: 16,
+    position: "relative",
   },
 
   imgPrato: {
@@ -44,6 +46,7 @@ export const styles = StyleSheet.create({
     marginRight: 14,
     alignItems: "center",
     gap: 12,
+    position: "relative",
   },
 
   imgPratoPop: {
@@ -61,5 +64,15 @@ export const styles = StyleSheet.create({
   receitasContainer: {
     marginTop: 20,
     marginBottom: 20,
+  },
+
+  favoritoContainer: {
+    position: "absolute",
+    top: 15,
+    right: 15,
+    zIndex: 2,
+    backgroundColor: '#d3d3d3',
+    borderRadius: 15,
+    padding: 5,
   },
 });

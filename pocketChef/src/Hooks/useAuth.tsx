@@ -10,7 +10,16 @@ axios.get(apiUrl).catch((error) => {
   console.error("Erro ao carregar API:");
 });
 
+export interface PropsApi {
+  id: number;
+  title: string;
+  image?: string;
+  imageType?: string;
+};
+
 export type PropsContext = {
+  favoritos: PropsApi[],
+  setFavoritos: (value: PropsApi[]) => void,
   email: string;
   setEmail: (email: string) => void;
   password: string;
@@ -23,6 +32,8 @@ export type PropsContext = {
 
 //criador do contexto
 const AuthContext = createContext<PropsContext>({
+  favoritos: [],
+  setFavoritos: () => {},
   email: "",
   setEmail: () => {},
   password: "",
@@ -39,6 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [modalAberto, setModalAberto] = useState<boolean>(false);
+  const [favoritos, setFavoritos] = useState<PropsApi[]>([]);
 
   useEffect(() => {
     checkLogin();
@@ -103,6 +115,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     //dentro do value eu coloco todas as informações que eu quero passar ao chamar esse hook
     <AuthContext.Provider
       value={{
+        favoritos,
+        setFavoritos,
         email,
         setEmail,
         password,

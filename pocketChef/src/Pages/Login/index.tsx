@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ButtonComponent } from "../../Components/ButtonComponent";
-import { styles } from "./style"; // Certifique-se de que o caminho para o arquivo de estilos esteja correto
+import { styles } from "./style";
 import { useAuth } from "../../Hooks/useAuth";
 import { TextInputComponent } from "../../Components/TextInput";
 import { ModalComponent } from "../../Components/ModalComponent";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }));
@@ -24,20 +25,25 @@ const Login = () => {
         toValue: 0,
         speed: 4,
         bounciness: 20,
-        useNativeDriver: true, // Adicione esta linha
+        useNativeDriver: true,
       }),
       Animated.timing(opacity, {
         toValue: 1,
         duration: 200,
-        useNativeDriver: true, // Adicione esta linha
+        useNativeDriver: true,
       }),
     ]).start();
   }, []);
 
-  const { email, setEmail, password, setPassword, handleLoginAuth, modalAberto} = useAuth();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleLoginAuth,
+    modalAberto,
+  } = useAuth();
 
-  // const [email, setEmail] = useState<string>();
-  // const [password, setPassword] = useState<string>();
   const navigator = useNavigation();
 
   const handleEmail = (value: string) => {
@@ -87,9 +93,7 @@ const Login = () => {
               value={password}
             />
             <ButtonComponent title="Entrar" handleOnChange={handleLogin} />
-            {modalAberto && (
-              <ModalComponent />
-            )}
+            {modalAberto && <ModalComponent />}
             <ButtonComponent title="Cadastro" handleOnChange={handleCadastro} />
           </View>
         </Animated.View>
