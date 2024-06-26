@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { Routes } from './src/Routes';
 import Cadastro from './src/Pages/Cadastro';
