@@ -28,6 +28,8 @@ export type PropsContext = {
   handleLoginAuth: (email: string, password: string) => void;
   modalAberto: boolean;
   setModalAberto: (value: boolean) => void;
+  favoritar: (item: PropsApi) => void;
+  isFavorite: (id: number) => boolean;
 };
 
 //criador do contexto
@@ -42,6 +44,8 @@ const AuthContext = createContext<PropsContext>({
   handleLoginAuth: () => {},
   modalAberto: false,
   setModalAberto: () => {},
+  favoritar: () => {},
+  isFavorite: () => false,
 });
 
 //o contexto de todo a aplicação esta aqui dentro do authProvider
@@ -54,6 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     checkLogin();
+    loadFavoritos();
   }, []);
 
   const checkLogin = async () => {
@@ -110,13 +115,43 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const loadFavoritos = async () => {
+    try {
+      const favoritosJson = await AsyncStorage.getItem("favoritos");
+      if (favoritosJson) {
+        setFavoritos(JSON.parse(favoritosJson));
+      }
+    } catch (error) {
+      console.error("Erro ao carregar favoritos:", error);
+    }
+  };
+
+  const favoritar = async (item: PropsApi) => {
+    let novosFavoritos;
+    if (favoritos.some((fav) => fav.id === item.id)) {
+      novosFavoritos = favoritos.filter((fav) => fav.id !== item.id);
+    } else {
+      novosFavoritos = [...favoritos, item];
+    }
+    setFavoritos(novosFavoritos);
+    try {
+      await AsyncStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
+    } catch (error) {
+      console.error("Erro ao salvar favorito:", error);
+    }
+  };
+
+  const isFavorite = (id: number) => {
+    return favoritos.some(fav => fav.id === id);
+  };
+
   return (
     //manda para o app tudo o que tem no criador do contexto
     //dentro do value eu coloco todas as informações que eu quero passar ao chamar esse hook
     <AuthContext.Provider
       value={{
-        favoritos,
-        setFavoritos,
+        favoritos, setFavoritos,
+        favoritar, isFavorite,
         email,
         setEmail,
         password,
